@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convert File to Data URI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Convert File to Data</h1>
+    <p><b>Get started: </b>Upload a file over here to convert it to a data URI.</p>
+    <form id="uploadForm">
+        <input type="file" name="File" id="fileSelect">
+        <p><b>Data URI:</b></p>
+        <div id="output"></div>
+        <p>Click the box and press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy.</p>
+    </form>
+    <h2>Credits</h2>
+    <p>The JavaScript was from <a href="https://www.youtube.com/watch?v=VElnT8EoEEM" target="_blank">this video</a>, but the file preview stuff were changed to get the file data URI in the container.</p><p>The container and button stules were from <a href="https://developer.microsoft.com/en-us/fluentui" target="_blank">Microsoft Fluent UI</a>.</p><p>The rest were all made by me.</p>
+</body>
+<script>
+    const input = document.getElementById("fileSelect");
+    const outputContainer = document.getElementById("output");
+    input.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.addEventListener("load", function () {
+                outputContainer.innerText = this.result;
+            });
+            const output = reader.readAsDataURL(file);
+        } else {
+            outputContainer.innerText = null;
+        }
+    });
+</script>
+
+</html>
